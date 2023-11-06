@@ -36,5 +36,13 @@ namespace RegistrationWizard.Controllers
             regionService.UpdateUserLocation(user);
             return Ok();
         }
+
+        [HttpGet]
+        public ActionResult IsUserNameExist(string name)
+        {
+            var result = userService.IsUserNameExist(name);
+
+            return Ok(result);
+        }
     }
 }
