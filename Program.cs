@@ -9,12 +9,12 @@ builder.Services
     .AddFastEndpoints()
     .SwaggerDocument();
 
-var app = builder.Build();
+var application = builder.Build();
 
-app
+application
     .UseFastEndpoints()
     .UseSwaggerGen()
     .UseInfrastructure();
 
-// await app.SeedDataAsync();
-app.Run();
+await application.SeedDatabaseAsync();
+await application.RunAsync();

@@ -19,7 +19,7 @@ namespace RegistrationWizard.Infrastructure
                 .WriteTo.File("log.txt", rollingInterval: RollingInterval.Day)
                 .CreateLogger();
 
-            var connectionString = configuration.GetConnectionString("SqlLiteConnectionString") 
+            var connectionString = configuration.GetConnectionString("SqliteConnectionString") 
                 ?? throw new ArgumentNullException("Sqlite connection string is missing.");
 
             services.AddDbContext<ApplicationDbContext>(options => 
@@ -41,6 +41,20 @@ namespace RegistrationWizard.Infrastructure
             app.UseMiddleware<ErrorHandlerMiddleware>();
 
             return app;
+        }
+
+        public static async Task SeedDatabaseAsync(this IApplicationBuilder app, CancellationToken ct = default)
+        {
+            await using var scope = app
+                .ApplicationServices
+                .GetRequiredService<IServiceScopeFactory>()
+                .CreateAsyncScope();
+
+            var dbSeed = scope
+                .ServiceProvider
+                .GetRequiredService<IDataSeeder>();
+
+            await dbSeed.SeedAsync(ct);
         }
     }
 }

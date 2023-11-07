@@ -9,6 +9,7 @@ namespace RegistrationWizard.Domain.Repositories
         void Delete(User user);
 
         Task<User?> GetAsync(long userId, CancellationToken ct);
+        Task<bool> IsLoginExistAsync(string login, CancellationToken ct);
         Task CreateAsync(User user, CancellationToken ct);
         Task DeleteAsync(User user, CancellationToken ct);
     }

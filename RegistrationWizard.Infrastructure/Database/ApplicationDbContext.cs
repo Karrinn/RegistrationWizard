@@ -4,7 +4,7 @@ using RegistrationWizard.Infrastructure.Database.EntityConfigs;
 
 namespace RegistrationWizard.Infrastructure.Database
 {
-    internal class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : DbContext
     {
         public DbSet<User> Users => Set<User>();
         public DbSet<Country> Countries => Set<Country>();

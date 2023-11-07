@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="RegistrationWizard.sln" />
+    <None Include="RegistrationWizard.API.sln" />
   </ItemGroup>
 
   <ItemGroup>

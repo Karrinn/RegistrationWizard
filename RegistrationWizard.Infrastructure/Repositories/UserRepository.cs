@@ -36,5 +36,10 @@ namespace RegistrationWizard.Infrastructure.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public Task<bool> IsLoginExistAsync(string login, CancellationToken ct)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
