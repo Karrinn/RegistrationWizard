@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using RegistrationWizard.Domain.Entities;
 
 namespace RegistrationWizard.Infrastructure.Database
@@ -21,24 +22,35 @@ namespace RegistrationWizard.Infrastructure.Database
 
         public async Task SeedAsync(CancellationToken cancellationToken)
         {
+            logger.LogInformation("Applying db migrations....");
+            // Apply migrations
+            await dbContext.Database.MigrateAsync(cancellationToken);
+
+            // Seed data if no data in the db
+            logger.LogInformation("Seeding data...");
+            if (await dbContext.Countries.AnyAsync(cancellationToken))
+            {
+                return;
+            }
+
             logger.LogInformation("Seeding data...");
 
             var countries = new List<Country>()
             {
-                new Country { Id = 1, Name = "Russia" },
-                new Country { Id= 2, Name = "USA" },
+                new Country { Name = "Russia" },
+                new Country { Name = "USA" },
             };
 
             await dbContext.Countries.AddRangeAsync(countries, cancellationToken);
 
             var provinces = new List<Province>()
             {
-                new Province { Name = "Moscow", CountryId = 1 },
-                new Province { Name = "St. Petersburg", CountryId = 1 },
-                new Province { Name = "Kazan", CountryId = 1 },
-                new Province { Name = "Washington D.C.", CountryId = 2 },
-                new Province { Name = "New-York", CountryId = 2 },
-                new Province { Name = "Los Angeles", CountryId = 2 },
+                new Province { Name = "Moscow", Country = countries[0] },
+                new Province { Name = "St. Petersburg", Country = countries[0] },
+                new Province { Name = "Kazan", Country = countries[0] },
+                new Province { Name = "Washington D.C.", Country = countries[1] },
+                new Province { Name = "New-York", Country = countries[1] },
+                new Province { Name = "Los Angeles", Country = countries[1] },
             };
 
             await dbContext.Provinces.AddRangeAsync(provinces, cancellationToken);

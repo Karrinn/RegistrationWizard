@@ -2,9 +2,14 @@
 {
     public class Country
     {
-        public long Id { get; set; }
-        public string Name { get; set; }
+        public Country() 
+        { 
+            Provinces = new List<Province>();
+        }
 
-        public List<Province> Provinces { get; set; } = new();
+        public int CountryId { get; set; }
+        public string Name { get; set; } = "";
+
+        public IReadOnlyCollection<Province> Provinces { get; set; }
     }
 }

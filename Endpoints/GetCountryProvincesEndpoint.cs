@@ -6,22 +6,22 @@ using RegistrationWizard.Domain.Repositories;
 
 namespace RegistrationWizard.Endpoints
 {
-    public class GetProvincesEndpoint : Endpoint<GetProvinces, IEnumerable<ProvinceDto>>
+    public class GetCountryProvincesEndpoint : Endpoint<GetCountryProvincies, IEnumerable<ProvinceDto>>
     {
         private readonly ILocationRepository locationRepository;
 
         public override void Configure()
         {
-            Get("/country/{countryId:long}");
+            Get("/countries/{countryId}/provincies");
             AllowAnonymous();
         }
 
-        public GetProvincesEndpoint(ILocationRepository locationRepository)
+        public GetCountryProvincesEndpoint(ILocationRepository locationRepository)
         {
             this.locationRepository = locationRepository;
         }
 
-        public override async Task HandleAsync(GetProvinces req, CancellationToken ct)
+        public override async Task HandleAsync(GetCountryProvincies req, CancellationToken ct)
         {
             var provinces = await locationRepository.GetCountryProvincesAsync(req.CountryId, ct);
             if (provinces is null)

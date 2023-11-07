@@ -1,7 +1,7 @@
 ﻿namespace RegistrationWizard.Application.Requests
 {
-    public class GetProvinces
+    public class GetCountryProvincies
     {
-        public long CountryId { get; set; }
+        public int CountryId { get; set; }
     }
 }

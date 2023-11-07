@@ -27,12 +27,12 @@ namespace RegistrationWizard.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public User? Get(long userId)
+        public User? Get(int userId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<User?> GetAsync(long userId, CancellationToken ct)
+        public Task<User?> GetAsync(int userId, CancellationToken ct)
         {
             throw new NotImplementedException();
         }

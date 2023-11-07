@@ -2,10 +2,10 @@
 {
     public class Province
     {
-        public long Id { get; set; }
+        public int ProvinceId { get; set; }
         public string Name { get; set; }
 
-        public long CountryId { get; set; }
+        public int CountryId { get; set; }
         public Country? Country { get; set; }
     }
 }

@@ -8,9 +8,9 @@ namespace RegistrationWizard.Infrastructure.Database.EntityConfigs
     {
         public void Configure(EntityTypeBuilder<Province> builder)
         {
-            builder.HasKey(x => x.Id);
+            builder.HasKey(x => x.ProvinceId);
             builder
-                .Property(x => x.Id)
+                .Property(x => x.ProvinceId)
                 .IsRequired()
                 .ValueGeneratedOnAdd();
 

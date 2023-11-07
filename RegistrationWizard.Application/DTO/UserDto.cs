@@ -1,4 +1,4 @@
 ﻿namespace RegistrationWizard.Application.DTO
 {
-    public record UserDto(long userId, string login, string passwordHash, long? countryId, long? provinceId);
+    public record UserDto(int userId, string login, string passwordHash, int? countryId, int? provinceId);
 }

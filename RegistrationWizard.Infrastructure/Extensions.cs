@@ -1,30 +1,26 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Reflection;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RegistrationWizard.Domain.Repositories;
 using RegistrationWizard.Infrastructure.Database;
 using RegistrationWizard.Infrastructure.Repositories;
-using Serilog;
 
 namespace RegistrationWizard.Infrastructure
 {
-    public static class Extension
+    public static class Extensions
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            // Add Serilog
-            Log.Logger = new LoggerConfiguration()
-                .WriteTo.Console()
-                .WriteTo.File("log.txt", rollingInterval: RollingInterval.Day)
-                .CreateLogger();
-
             var connectionString = configuration.GetConnectionString("SqliteConnectionString") 
                 ?? throw new ArgumentNullException("Sqlite connection string is missing.");
 
-            services.AddDbContext<ApplicationDbContext>(options => 
-                options.UseSqlite(connectionString)
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlite(connectionString,
+                    sqlOpts => sqlOpts.MigrationsAssembly(typeof(ApplicationDbContext).GetTypeInfo().Assembly.GetName().Name))
             );
+            services.AddTransient<IDataSeeder, DataSeeder>();
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ILocationRepository, LocationRepository>();
@@ -36,7 +32,6 @@ namespace RegistrationWizard.Infrastructure
 
         public static IApplicationBuilder UseInfrastructure(this IApplicationBuilder app)
         {
-            app.UseSerilogRequestLogging();
             app.UseCors();
             app.UseMiddleware<ErrorHandlerMiddleware>();
 

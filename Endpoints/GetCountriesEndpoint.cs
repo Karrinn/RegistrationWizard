@@ -1,12 +1,11 @@
 ﻿using FastEndpoints;
 using RegistrationWizard.Application;
 using RegistrationWizard.Application.DTO;
-using RegistrationWizard.Application.Requests;
 using RegistrationWizard.Domain.Repositories;
 
 namespace RegistrationWizard.Endpoints
 {
-    public class GetCounriesEndpoint : Endpoint<GetProvinces, IEnumerable<CountryDto>>
+    public class GetCountriesEndpoint : EndpointWithoutRequest<IEnumerable<CountryDto>>
     {
         private readonly ILocationRepository locationRepository;
 
@@ -16,12 +15,12 @@ namespace RegistrationWizard.Endpoints
             AllowAnonymous();
         }
 
-        public GetCounriesEndpoint(ILocationRepository locationRepository)
+        public GetCountriesEndpoint(ILocationRepository locationRepository)
         {
             this.locationRepository = locationRepository;
         }
 
-        public override async Task HandleAsync(GetProvinces req, CancellationToken ct)
+        public override async Task HandleAsync(CancellationToken ct)
         {
             var countries = await locationRepository.GetCountriesAsync(ct);
             if (countries is null)

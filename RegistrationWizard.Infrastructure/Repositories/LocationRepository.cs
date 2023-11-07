@@ -1,20 +1,36 @@
-﻿using RegistrationWizard.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using RegistrationWizard.Domain.Entities;
 using RegistrationWizard.Domain.Repositories;
+using RegistrationWizard.Infrastructure.Database;
 
 namespace RegistrationWizard.Infrastructure.Repositories
 {
     public class LocationRepository : ILocationRepository
     {
-        public LocationRepository() { }
+        private readonly ApplicationDbContext dbContext;
 
-        public Task<List<Country>> GetCountriesAsync(CancellationToken ct)
+        public LocationRepository(ApplicationDbContext dbContext)
         {
-            throw new NotImplementedException();
+            this.dbContext = dbContext;
         }
 
-        public Task<List<Province>> GetCountryProvincesAsync(long countryId, CancellationToken ct)
+        public async Task<List<Country>> GetCountriesAsync(CancellationToken ct)
         {
-            throw new NotImplementedException();
+            return await dbContext
+                .Countries
+                .AsNoTracking()
+                .ToListAsync(ct);
+        }
+
+        public async Task<List<Province>> GetCountryProvincesAsync(int countryId, CancellationToken ct)
+        {
+            var country = await dbContext
+                .Countries
+                .AsNoTracking()
+                .Include(x => x.Provinces)
+                .SingleOrDefaultAsync(x => x.CountryId == countryId, ct);
+
+            return country.Provinces.ToList();
         }
     }
 }

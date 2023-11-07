@@ -1,4 +1,4 @@
 ﻿namespace RegistrationWizard.Application.DTO
 {
-    public record CountryDto(long id, string name);
+    public record CountryDto(int id, string name);
 }

@@ -6,7 +6,7 @@ namespace RegistrationWizard.Infrastructure.Database
 {
     public class ApplicationDbContext : DbContext
     {
-        public DbSet<User> Users => Set<User>();
+        // public DbSet<User> Users => Set<User>();
         public DbSet<Country> Countries => Set<Country>();
         public DbSet<Province> Provinces => Set<Province>();
 
@@ -18,7 +18,7 @@ namespace RegistrationWizard.Infrastructure.Database
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.ApplyConfiguration(new UserEntityConfiguration());
+            //modelBuilder.ApplyConfiguration(new UserEntityConfiguration());
             modelBuilder.ApplyConfiguration(new CountryEntityConfiguration());
             modelBuilder.ApplyConfiguration(new ProvinceEntityConfiguration());
 

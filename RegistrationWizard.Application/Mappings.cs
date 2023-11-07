@@ -12,11 +12,11 @@ namespace RegistrationWizard.Application
 
         public static CountryDto AsDto(this Country entity)
         {
-            return new CountryDto(entity.Id, entity.Name);
+            return new CountryDto(entity.CountryId, entity.Name);
         }
         public static ProvinceDto AsDto(this Province entity)
         {
-            return new ProvinceDto(entity.Id, entity.Name, entity.CountryId);
+            return new ProvinceDto(entity.ProvinceId, entity.Name, entity.CountryId);
         }
     }
 }
