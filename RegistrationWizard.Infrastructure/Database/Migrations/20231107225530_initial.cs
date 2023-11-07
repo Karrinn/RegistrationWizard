@@ -43,15 +43,55 @@ namespace RegistrationWizard.Infrastructure.Database.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Login = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
+                    PasswordHash = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
+                    Salt = table.Column<string>(type: "TEXT", nullable: false),
+                    CountryId = table.Column<int>(type: "INTEGER", nullable: true),
+                    ProvinceId = table.Column<int>(type: "INTEGER", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.UserId);
+                    table.ForeignKey(
+                        name: "FK_Users_Countries_CountryId",
+                        column: x => x.CountryId,
+                        principalTable: "Countries",
+                        principalColumn: "CountryId");
+                    table.ForeignKey(
+                        name: "FK_Users_Provinces_ProvinceId",
+                        column: x => x.ProvinceId,
+                        principalTable: "Provinces",
+                        principalColumn: "ProvinceId");
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Provinces_CountryId",
                 table: "Provinces",
                 column: "CountryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_CountryId",
+                table: "Users",
+                column: "CountryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_ProvinceId",
+                table: "Users",
+                column: "ProvinceId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Users");
+
             migrationBuilder.DropTable(
                 name: "Provinces");
 

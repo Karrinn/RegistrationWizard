@@ -4,13 +4,11 @@ namespace RegistrationWizard.Domain.Repositories
 {
     public interface IUserRepository
     {
-        User? Get(int userId);
-        void Create(User user);
-        void Delete(User user);
-
-        Task<User?> GetAsync(int userId, CancellationToken ct);
-        Task<bool> IsLoginExistAsync(string login, CancellationToken ct);
         Task CreateAsync(User user, CancellationToken ct);
-        Task DeleteAsync(User user, CancellationToken ct);
+        
+        Task<bool> CheckLoginExistAsync(string login, CancellationToken ct);
+        
+        Task<User?> GetAsync(string login, CancellationToken ct);
+
     }
 }

@@ -22,10 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="RegistrationWizard.API.sln" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="FastEndpoints" Version="5.19.2" />
     <PackageReference Include="FastEndpoints.Swagger" Version="5.19.2" />

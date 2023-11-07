@@ -1,45 +1,35 @@
-﻿using RegistrationWizard.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using RegistrationWizard.Domain.Entities;
 using RegistrationWizard.Domain.Repositories;
+using RegistrationWizard.Infrastructure.Database;
 
 namespace RegistrationWizard.Infrastructure.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        public UserRepository() { }
+        private readonly ApplicationDbContext dbContext;
 
-        public void Create(User user)
+        public UserRepository(ApplicationDbContext dbContext)
         {
-            throw new NotImplementedException();
+            this.dbContext = dbContext;
         }
 
-        public Task CreateAsync(User user, CancellationToken ct)
+        public async Task CreateAsync(User user, CancellationToken ct)
         {
-            throw new NotImplementedException();
+            await dbContext.Users.AddAsync(user, ct);
+            await dbContext.SaveChangesAsync();
         }
 
-        public void Delete(User user)
+        public async Task<bool> CheckLoginExistAsync(string login, CancellationToken ct)
         {
-            throw new NotImplementedException();
+            return await dbContext.Users.AnyAsync(x => x.Login == login, ct);
         }
 
-        public Task DeleteAsync(User user, CancellationToken ct)
+        public async Task<User?> GetAsync(string login, CancellationToken ct)
         {
-            throw new NotImplementedException();
+            return await dbContext.Users.FirstOrDefaultAsync(x => x.Login == login, ct);
         }
 
-        public User? Get(int userId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<User?> GetAsync(int userId, CancellationToken ct)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> IsLoginExistAsync(string login, CancellationToken ct)
-        {
-            throw new NotImplementedException();
-        }
+        //todo delete async
     }
 }
