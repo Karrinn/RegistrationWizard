@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 
-interface Food {
+interface Country {
+  value: string;
+  viewValue: string;
+}
+
+interface Province {
   value: string;
   viewValue: string;
 }
@@ -12,10 +17,14 @@ interface Food {
 })
 
 export class Step2Component {
-  foods: Food[] = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'},
+  countries: Country[] = [
+    {value: '1', viewValue: 'Russia'},
+    {value: '2', viewValue: 'USA'},
   ];
-  selectedFood = this.foods[2].value;
+
+  selectedCountry = '';
+  
+  provinces: Province[] = [];
+
+  selectedProvince = '';
 }

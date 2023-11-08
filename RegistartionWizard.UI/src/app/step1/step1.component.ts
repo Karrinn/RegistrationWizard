@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./step1.component.css']
 })
 export class Step1Component {
-  checked = false;
+  login = "";
+  password = "";
+  confirmPassword = "";
+  agreement = false;
+  isStep2Disabled = true;
 }

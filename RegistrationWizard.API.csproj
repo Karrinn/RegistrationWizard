@@ -41,4 +41,8 @@
     <ProjectReference Include="RegistrationWizard.Infrastructure\RegistrationWizard.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="RegistartionWizard.API\" />
+  </ItemGroup>
+
 </Project>

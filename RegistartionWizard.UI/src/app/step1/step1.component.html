@@ -4,26 +4,26 @@
     <div>
         <mat-form-field>
             <mat-label>Login</mat-label>
-            <input matInput>
+            <input matInput  [(ngModel)]="login" type="text">
         </mat-form-field>
     </div>
     <div>
         <mat-form-field>
             <mat-label>Password</mat-label>
-            <input matInput>
+            <input matInput  [(ngModel)]="password" type="password">
         </mat-form-field>
     </div>
     <div>
         <mat-form-field>
             <mat-label>Confirm password</mat-label>
-            <input matInput>
+            <input matInput  [(ngModel)]="confirmPassword" type="password">
         </mat-form-field>
     </div>
     <div>
-        <mat-checkbox [(ngModel)]="checked">Agree to work </mat-checkbox>
+        <mat-checkbox [(ngModel)]="agreement">Agree to work </mat-checkbox>
     </div>
     <p></p>
     <div>
-        <button mat-flat-button color="primary">Go to step 2</button>
+        <button mat-flat-button color="primary" [disabled]="isStep2Disabled">Go to step 2</button>
     </div>
 </div>
