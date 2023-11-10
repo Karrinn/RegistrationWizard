@@ -26,6 +26,7 @@ namespace RegistrationWizard.Infrastructure
             services.AddScoped<ILocationRepository, LocationRepository>();
 
             services.AddCors(opts => { opts.AddDefaultPolicy(p => p.WithOrigins("*")); });
+            services.AddResponseCaching();
 
             return services;
         }
@@ -37,6 +38,7 @@ namespace RegistrationWizard.Infrastructure
                 .AllowAnyMethod()
                 .AllowAnyHeader());
             app.UseHttpsRedirection();
+            app.UseResponseCaching();
 
             app.UseMiddleware<ErrorHandlerMiddleware>();
 

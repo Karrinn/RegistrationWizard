@@ -7,12 +7,14 @@ namespace RegistrationWizard.Endpoints
 {
     public class GetCountriesEndpoint : EndpointWithoutRequest<IEnumerable<CountryDto>>
     {
+        const int cacheDurationSec = 60*60*24; // 1 day
         private readonly ILocationRepository locationRepository;
 
         public override void Configure()
         {
             Get("/countries");
             AllowAnonymous();
+            ResponseCache(cacheDurationSec);
         }
 
         public GetCountriesEndpoint(ILocationRepository locationRepository)

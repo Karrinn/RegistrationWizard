@@ -9,11 +9,13 @@ namespace RegistrationWizard.Endpoints
     public class GetCountryProvincesEndpoint : Endpoint<GetCountryProvincies, IEnumerable<ProvinceDto>>
     {
         private readonly ILocationRepository locationRepository;
+        const int cacheDurationSec = 60 * 60 * 24; // 1 day
 
         public override void Configure()
         {
             Get("/countries/{countryId}/provincies");
             AllowAnonymous();
+            ResponseCache(cacheDurationSec);
         }
 
         public GetCountryProvincesEndpoint(ILocationRepository locationRepository)
