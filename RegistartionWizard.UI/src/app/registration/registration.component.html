@@ -1,5 +1,68 @@
 <h5><u><i>Registration Form using Angular material!!</i></u></h5>
-<form action="">
-    <app-step1></app-step1>
-    <app-step2></app-step2>
-</form>
+<!-- <div class="reg-block">
+    <mat-tab-group animationDuration="0ms" >
+        <mat-tab label="First">
+            <app-step1></app-step1>
+        </mat-tab>
+        <mat-tab label="Second">
+            <app-step2></app-step2>
+        </mat-tab>
+    </mat-tab-group>
+</div> -->
+
+<div>
+    <h1>Step 1</h1>
+    <p></p>
+    <div>
+        <mat-form-field>
+            <mat-label>Login</mat-label>
+            <input matInput  [(ngModel)]="login" type="text">
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input matInput  [(ngModel)]="password" type="password">
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field>
+            <mat-label>Confirm password</mat-label>
+            <input matInput  [(ngModel)]="confirmPassword" type="password">
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-checkbox [(ngModel)]="agreement">Agree to work </mat-checkbox>
+    </div>
+    <p></p>
+    <div>
+        <!-- <button mat-flat-button color="primary" [disabled]="isStep2Disabled">Go to step 2</button> -->
+        <button mat-flat-button color="primary" [disabled]="!agreement">Go to step 2</button>
+    </div>
+</div>
+<div>
+    <h1>Step 2</h1>
+    <p></p>
+    <div>
+        <mat-form-field>
+          <mat-label>Country</mat-label>
+          <mat-select [(value)]="selectedCountry" (selectionChange)="countrySelected($event)">
+            <mat-option></mat-option>
+            <mat-option [value]="option.id" *ngFor="let option of countries">{{ option.name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field>
+          <mat-label>Province</mat-label>
+          <mat-select [(value)]="selectedProvince">
+            <mat-option></mat-option>
+            <mat-option [value]="option.id" *ngFor="let option of provinces">{{ option.name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+    </div>
+    <p></p>
+    <div>
+        <button mat-flat-button color="primary" (click)="createUser()">Save</button>
+    </div>
+</div>

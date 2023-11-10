@@ -1,5 +1,6 @@
 {
   "name": "registartion-wizard.ui",
+  "start": "ng serve --proxy-config proxy.conf.json",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",

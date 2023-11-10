@@ -24,6 +24,7 @@
     </div>
     <p></p>
     <div>
-        <button mat-flat-button color="primary" [disabled]="isStep2Disabled">Go to step 2</button>
+        <!-- <button mat-flat-button color="primary" [disabled]="isStep2Disabled">Go to step 2</button> -->
+        <button mat-flat-button color="primary" (click)="goToStep2">Go to step 2</button>
     </div>
 </div>

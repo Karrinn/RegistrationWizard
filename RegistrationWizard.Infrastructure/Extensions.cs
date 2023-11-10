@@ -32,7 +32,12 @@ namespace RegistrationWizard.Infrastructure
 
         public static IApplicationBuilder UseInfrastructure(this IApplicationBuilder app)
         {
-            app.UseCors();
+            app.UseCors(x => 
+                x.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+            app.UseHttpsRedirection();
+
             app.UseMiddleware<ErrorHandlerMiddleware>();
 
             return app;
