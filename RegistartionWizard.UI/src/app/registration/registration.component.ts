@@ -17,6 +17,8 @@ interface Province {
   providers: [HttpService]
 })
 export class RegistrationComponent implements OnInit  {
+  showStep2 = false;
+
   login = "";
   password = "";
   confirmPassword = "";
@@ -28,7 +30,15 @@ export class RegistrationComponent implements OnInit  {
   provinces: Province[] = [];
 
   selectedProvince = 0;
-  
+
+  hideStep1() {
+    this.showStep2 = true;
+  }
+
+  showStep1() {
+    this.showStep2 = false;
+  }
+
   constructor(private httpService: HttpService){}
 
   ngOnInit(){

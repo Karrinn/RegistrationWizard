@@ -10,7 +10,7 @@
     </mat-tab-group>
 </div> -->
 
-<div>
+<div [hidden]="showStep2" >
     <h1>Step 1</h1>
     <p></p>
     <div>
@@ -37,10 +37,10 @@
     <p></p>
     <div>
         <!-- <button mat-flat-button color="primary" [disabled]="isStep2Disabled">Go to step 2</button> -->
-        <button mat-flat-button color="primary" [disabled]="!agreement">Go to step 2</button>
+        <button mat-flat-button color="primary" [disabled]="!agreement" (click)="hideStep1()">Go to step 2</button>
     </div>
 </div>
-<div>
+<div [hidden]="!showStep2" >
     <h1>Step 2</h1>
     <p></p>
     <div>
@@ -63,6 +63,7 @@
     </div>
     <p></p>
     <div>
+        <button mat-flat-button color="primary" (click)="showStep1()" style="margin-right: 1em;">Go to step 1</button>
         <button mat-flat-button color="primary" (click)="createUser()">Save</button>
     </div>
 </div>
