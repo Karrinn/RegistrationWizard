@@ -11,7 +11,7 @@ using RegistrationWizard.Infrastructure.Database;
 namespace RegistrationWizard.Infrastructure.Database.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231107225530_initial")]
+    [Migration("20231113093631_initial")]
     partial class initial
     {
         /// <inheritdoc />
