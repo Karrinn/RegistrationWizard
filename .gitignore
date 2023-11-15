@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/RegistrationWizard.API/RegistrationWizard.API/registrationWizard.db
+/RegistrationWizard.API/RegistrationWizard.API/registrationWizard.db-shm
+/RegistrationWizard.API/RegistrationWizard.API/registrationWizard.db-wal
